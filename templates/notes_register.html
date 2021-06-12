@@ -1,0 +1,396 @@
+{% load static %}
+{% static "images" as baseUrl %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>GNDPC</title>
+	<link rel="icon" href="{% static 'images/kp.png' %}" type="image/icon type">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="description" content="GNDPC">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="{% static 'styles/bootstrap4/bootstrap.min.css' %}">
+	<link href="{% static 'plugins/font-awesome-4.7.0/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	<link rel="stylesheet" type="text/css" href="{% static 'styles/cm.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/home.css' %}">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!--Here function is passed to the change method-->
+<!-- <script>
+$(document).ready(function() {
+$(".field").change(function() {
+	
+	const subjectId = $(this).val(); 
+	alert("hi") // get the selected subject ID from the HTML dropdown list 
+	$.ajax({  
+		                   // initialize an AJAX request
+		type: "GET",
+		url: '{% url "get_topics_ajax" %}',
+		data: {
+			'subject_id': subjectId,       // add the country id to the POST parameters
+			'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
+		},
+		success: function (data) {   // `data` is from `get_topics_ajax` view function
+			let html_data = '<option value="">---------</option>';
+			data.forEach(function (data) {
+				html_data += `<option value="${data.id}">${data.name}</option>`
+			});
+			$(".field1").html(html_data); // replace the contents of the topic input with the data that came from the server
+		}
+	});
+});
+});
+</script> -->
+
+
+</head>
+<style>
+	body{
+		background-image: url('static/images/ja.jpg');
+background-size: cover;
+height: 100vh;
+	}
+    .contact-form{
+		background: #fff;
+		margin-top: 8%;
+		margin-bottom: 5%;
+		width: 70%;
+		border-radius: 70px;
+	}
+	.contact-form .form-control{
+		border-radius:1rem;
+	}
+	.contact-image{
+		text-align: center;
+	}
+	.contact-image img{
+		border-radius: 6rem;
+		width: 11%;
+		margin-top: -3%;
+		transform: rotate(29deg);
+	}
+	.contact-form form{
+		padding: 10%;
+	}
+	.contact-form form .row{
+		margin-bottom: -7%;
+	}
+	.contact-form h3{
+		margin-bottom: 8%;
+		margin-top: -10%;
+		text-align: center;
+		color: burlywood;
+        font-weight: bold;
+	}
+	.contact-form .btnContact {
+		width: 60%;
+		border: none;
+		border-radius: 1rem;
+		padding: 5.5%;
+		background: burlywood;
+		font-weight: 600;
+		color: #fff;
+		cursor: pointer;
+	}
+	.contact-form .btnContact:hover {
+		background: #794b4e;
+	}
+	.btnContactSubmit
+	{
+		width: 50%;
+		border-radius: 1rem;
+		padding: 1.5%;
+		color: #fff;
+		background-color: #0062cc;
+		border: none;
+		cursor: pointer;
+	}
+
+  @media screen and (max-width: 600px) {
+		.contact-form{
+			width: 90%;
+			height: auto;
+			border-radius: 40px;
+			margin-top: 50px;
+	}
+  }
+  @media screen and (max-width: 600px) {
+  .contact-image img{
+      width: 80px;
+  }
+}
+
+@media only screen 
+and (min-device-width: 768px) 
+and (max-device-width: 1024px)  {
+	.contact-form{
+		margin-top: 140px;
+		height: 50vh;
+		width: 85%;
+	  }
+	}
+	@media only screen 
+	and (min-device-width: 768px) 
+	and (max-device-width: 1024px)  {
+		.contact-image img{
+			width: 90px;
+		}
+	  }
+	  @media only screen 
+	  and (min-device-width: 768px) 
+	  and (max-device-width: 1024px)  {
+		.contact-form form{
+			padding: 5%;
+			margin-top: 80px;
+		  }
+		}
+		@media screen and (max-width: 600px) {
+		  .contact-form form{
+			padding: 5%;
+			margin-top: 15px;
+			}
+		  }
+
+@media screen 
+  and (device-width: 360px) 
+  and (device-height: 640px)  {
+	.contact-form .form-control{
+		height: 55px;
+	}
+}
+@media screen 
+  and (device-width: 360px) 
+  and (device-height: 640px)  {
+	.contact-form{
+		margin-top: 140px;
+		height: 50vh;
+
+	  }
+}
+</style>
+<body>
+
+	
+	  <nav class="navbar navbar-expand-lg navbar-dark" style="margin-top: 16px;">
+
+		<!--  Show this only on mobile to medium screens  -->
+		  <a class="navbar-brand d-lg-none" href="#">ＧＮＤＰＣ</a>
+		
+		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		  </button>
+		
+		<!--  Use flexbox utility classes to change how the child elements are justified  -->
+		  <div class="collapse navbar-collapse justify-content-between" id="navbarToggle">
+		
+			<ul id="kp" class="navbar-nav" style="font-size: 1.5vw;font-weight:bold;color:white !important;">
+			  <li class="nav-item h5">
+				<a class="nav-link text-white" href="{% url 'index' %}">Home </a>
+			  </li>
+			  <li class="nav-item h5">
+				<a class="nav-link text-white" href="">Notes</a>
+			  </li>
+			  <li class="nav-item h5">
+				<a class="nav-link text-white" href="complain_register">Complian</a>
+			  </li>
+			</ul>
+			
+			
+		<!--   Show this only lg screens and up   -->
+			<a class="navbar-brand d-none d-lg-block" href="#" style="margin-right: 2rem !important; font-size:2vw;">ＧＮＤＰＣ</a>
+			
+			
+			
+			<ul class="navbar-nav" style="font-size: 1.5vw;font-weight:bold;">
+			  <li class="nav-item h5">
+				<a class="nav-link text-white" href="#">Track Complian</a>
+			  </li>
+			  <li class="nav-item h5">
+				<a class="nav-link text-white" href="#">Login</a>
+			  </li>
+			  <!-- <li class="nav-item">
+				<a class="nav-link" href="#">Link</a>
+			  </li> -->
+			</ul>
+		  </div>
+		</nav>
+
+
+<!--  -->
+<div class="container contact-form">
+	<div class="contact-image">
+		<img src="{% static 'images/ab.png' %}" alt="img"/ style="background-color: burlywood;">
+	</div>
+	<form class="fm" action = "notes_register_here" method = "POST" enctype="multipart/form-data">
+			{% csrf_token %}
+			
+		<h3>𝚁𝚎𝚐𝚒𝚜𝚝𝚎𝚛 notes</h3>
+		{% if error %}
+		<div class="alert alert-danger" role="alert">
+		{{error}}
+		</div>
+		{% endif %}
+	   <div class="row">
+
+			<div class="col-md-6">
+				<div class="form-group">
+				
+				Name	<input type="text" name="name" class="form-control" placeholder="Your Name *" value="{{values.name}}" />
+				</div>
+				<div class="form-group">
+					<input type="text" name="email" class="form-control" placeholder="Your Email *" value="{{values.email}}" />
+				</div>
+				<div class="form-group">
+					<input type="text" name="phoneno" class="form-control" placeholder="Your Phone Number *" value="{{values.phoneno}}" />
+				</div>
+				<div class="form-group">
+					<input type="text" name="rollno" class="form-control" placeholder="Your Roll Number *" value="{{values.rollno}}" />
+				</div>
+
+				<div class="form-group">
+					<input type="text" name="section" class="form-control" placeholder="Your section Number *" value="{{values.section}}" />
+				</div>
+				<div class="form-group">
+					<input type="text" name="notesname" class="form-control" placeholder="enter here name of note" value="{{values.notes_name}}" />
+				</div>
+				
+				<div class="col-md-6">
+					<div class="form-group">
+					  <label for="inputStatus">Trade</label>
+					  <select id="id_country" class="field">
+						<option selected disabled>Choose trade</option>
+						<!-- for loop in loops lgjuu -->
+						{% if trades %}
+						<option value="{{trades}}">{{trades}}</option>
+						{% else %}
+						<option value="{{values.trades}}">{{values.trades}}</option>
+						{% endif %}
+					  </select>
+					</div>
+				<div class="col-md-6">
+					<div class="form-group">
+					  <label for="inputStatus">Semester</label>
+					  <select id="id_country" class="field" name="sem" >
+						<option selected disabled>Choose Semester</option>
+						{% if sem %}
+						<option value="{{sem}}">{{sem}}</option>
+						{% else %}
+						<option value="{{values.sem}}">{{values.sem}}</option>
+						{% endif %}
+					  </select>
+					</div>
+					<div class="form-group">
+						<label for="inputStatus">subject</label>
+						  <select id="" name="subject">
+							
+							<option selected disabled>Choose subjects</option>
+							
+							{% if cc%}
+							<option value="{{cc}}">{{cc}}</option>
+							{% else %}
+							<option value="{{values.subject_notes}}">{{values.subject_notes}}</option>
+							{% endif %}
+							
+						  </select>
+					</div>
+				  <!-- </div>
+				  <div class="col-md-6">
+					<div class="form-group">
+					  <label for="inputStatus">Topic</label>
+					  <select id="question-topic" class="field1" name="topic">
+						<option selected disabled>Choose a topic</option>
+					  </select>
+					</div>
+				  </div> -->
+			</div>
+			<div class="col-md-6">
+				<div class="form-group">
+					<input type="file" name="image" id="file" class="file" value="upload pdf file"  onchange="Filevalidation()" >
+				</div>
+				<div class="form-group">
+					<textarea name="description" class="form-control" placeholder="About Your notes *" style="width: 100%; height: 150px;"></textarea>
+				</div>
+				<div class="form-group">
+					<input type="submit" name="submit" class="btnContact" value="Submit" />
+					<!-- {{ random_str }}-->
+					{{ msg }} 
+				</div>
+			</div>
+		</div>
+	</form>
+
+</div>
+</body>
+<script type="text/javascript">
+
+	$(document).on('submit','#name-form',function(e){
+        e.preventDefault();
+        $.ajax({
+            type:'POST',
+            url:'{% url "notes_register" %}',
+            data:
+            {
+                task:$("#name").val(),
+                csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
+            },
+            success:function(){
+                  alert('Saved');
+                    }
+            })
+        });
+		
+</script>
+<script>
+    if ( window.history.replaceState ) {
+        window.history.replaceState( null, null, window.location.href );
+    }
+</script>
+<script>
+    Filevalidation = () => {
+        const fi = document.getElementById('file');
+        // Check if any file is selected.
+		var fileInput = 
+                document.getElementById('file');
+		var filePath = fileInput.value;
+          
+            // Allowing file type
+            var allowedExtensions = 
+                    /(\.jpg|\.jpeg|\.png|\.pdf)$/i;
+              
+            if (!allowedExtensions.exec(filePath)) {
+                alert('Invalid file type');
+                fileInput.value = '';
+                return false;
+            } 
+        	else if (fi.files.length > 0) {
+            for (const i = 0; i <= fi.files.length - 1; i++) {
+ 
+                const fsize = fi.files.item(i).size;
+                const file = Math.round((fsize / 1024));
+                // The size of the file.
+
+                if (file >= 4096) {
+                    alert(
+                      "File too Big, please select a file less than 4mb");
+					  document.getElementById("file").value = "";
+					 
+                } else if (file < 100) {
+                    alert(
+						
+                      "File too small, please select a file greater than 2mb");
+					  document.getElementById("file").value = "";
+					  
+                } else {
+					
+                    document.getElementById('size').innerHTML = '<b>'
+                    + file + '</b> KB';
+                }
+            }
+        }
+		
+    }
+</script>
+</html>

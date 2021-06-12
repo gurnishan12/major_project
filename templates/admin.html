@@ -1,0 +1,2203 @@
+{% load static %}
+{% static "images" as baseUrl %} 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>GNDPC</title>
+	<link rel="icon" href="{% static 'images/kp.png' %}" type="image/icon type">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="description" content="GNDPC">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="{% static 'styles/bootstrap4/bootstrap.min.css' %}">
+	<link href="{% static 'plugins/font-awesome-4.7.0/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" type="text/css" href="{% static 'styles/home.css' %}">
+	<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<link rel="stylesheet" href=
+"https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+      
+    <script src=
+"https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js">
+    </script>
+	<script>
+		$(document).ready(function() {
+		$("#field").change(function() {
+			
+			const trade = $(this).val(); 
+			
+			// get the selected subject ID from the HTML dropdown list 
+			$.ajax({  
+								   // initialize an AJAX request
+				type: "GET",
+				url: '{% url "store_data" %}',
+				data: {
+					'trade': trade,       // add the country id to the POST parameters
+					'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
+				},
+				
+				
+		});
+		});
+	});
+		</script>
+		<script>
+			$(document).ready(function() {
+			$(".field2").change(function() {
+				
+				const subjectId = $(this).val(); 
+				
+				$.ajax({  
+									   // initialize an AJAX request
+					type: "GET",
+					url: '{% url "store_data_full" %}',
+					data: {
+						'subject_id': subjectId,       // add the country id to the POST parameters
+						'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
+					},
+					success: function (data) {   // `data` is from `get_topics_ajax` view function
+						let html_data = '<option value="">---------</option>';
+						data.forEach(function (data) {
+							html_data += `<option value="${data.id}">${data.name}</option>`
+						});
+						$(".field3").html(html_data); // replace the contents of the topic input with the data that came from the server
+					}
+				});
+			});
+			});
+			</script>
+			<script>
+				$(document).ready(function() {
+				$("#field_").change(function() {
+					
+					const trade = $(this).val(); 
+					// get the selected subject ID from the HTML dropdown list 
+					$.ajax({  
+										   // initialize an AJAX request
+						type: "GET",
+						url: '{% url "store_data" %}',
+						data: {
+							'trade': trade,       // add the country id to the POST parameters
+							'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
+						},
+						
+						
+				});
+				});
+			});
+				</script>
+				<script>
+					$(document).ready(function() {
+					$(".field2_").change(function() {
+						
+						const subjectId = $(this).val(); 
+						alert("hi") // get the selected subject ID from the HTML dropdown list 
+						$.ajax({  
+											   // initialize an AJAX request
+							type: "GET",
+							url: '{% url "store_data_full" %}',
+							data: {
+								'subject_id': subjectId,       // add the country id to the POST parameters
+								'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
+							},
+							success: function (data) {   // `data` is from `get_topics_ajax` view function
+								let html_data = '<option value="">---------</option>';
+								data.forEach(function (data) {
+									html_data += `<option value="${data.id}">${data.name}</option>`
+								});
+								$(".field3").html(html_data); // replace the contents of the topic input with the data that came from the server
+							}
+						});
+					});
+					});
+					</script>
+			<script>
+				$(document).ready(function() {
+				$(".semster_choose").change(function() {
+					
+					const trade = $(this).val();
+					
+					// get the selected subject ID from the HTML dropdown list 
+					$.ajax({  
+									   // initialize an AJAX request 
+						type: "GET",
+						url: '{% url "show_subject_in_addsubject" %}',
+						data: {
+							'trade': trade,       // add the country id to the POST parameters
+							'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
+						},
+						success: function (data1) {   // `data` is from `get_topics_ajax` view function
+							
+							let html_data = '<option value="">sem1</option>';
+							data1.forEach(function (data1) {
+								
+								html_data += `<option value="${data1.id}">${data1.name}</option>`
+							});
+						
+							$(".table_show").html(html_data);
+							calla(trade);
+							 // replace the contents of the topic input with the data that came from the server
+						}
+					});
+						
+				
+		
+				
+						function calla(trade){
+							
+						
+						
+						// get the selected subject ID from the HTML dropdown list 
+						$.ajax({  
+										   // initialize an AJAX request 
+							type: "GET",
+							url: '{% url "show_subject_in_addsubject2" %}',
+							data: {
+								'trade2': trade,       // add the country id to the POST parameters
+								'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
+							},
+							success: function (data2) {   // `data` is from `get_topics_ajax` view function
+								
+								let html_data2 = '<option value="">sem2</option>';
+								data2.forEach(function (data2) {
+									
+									html_data2 += `<option value="${data2.id}">${data2.name}</option>`
+								});
+							
+								$(".table_show2").html(html_data2);
+								callb(trade); // replace the contents of the topic input with the data that came from the server
+							}
+						});
+							
+						}
+						function callb(trade){
+						
+							
+							
+							
+							// get the selected subject ID from the HTML dropdown list 
+							$.ajax({  
+											   // initialize an AJAX request 
+								type: "GET",
+								url: '{% url "show_subject_in_addsubject3" %}',
+								data: {
+									'trade3': trade,       // add the country id to the POST parameters
+									'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
+								},
+								success: function (data3) {   // `data` is from `get_topics_ajax` view function
+									
+									let html_data3 = '<option value=""> sem3</option>';
+									data3.forEach(function (data3) {
+										
+										html_data3 += `<option value="${data3.id}">${data3.name}</option>`
+									});
+								
+									$(".table_show3").html(html_data3);
+									callc(trade); // replace the contents of the topic input with the data that came from the server
+								}
+							});
+								
+						}
+				
+						
+								function callc(trade){
+								
+								
+								// get the selected subject ID from the HTML dropdown list 
+								$.ajax({  
+												   // initialize an AJAX request 
+									type: "GET",
+									url: '{% url "show_subject_in_addsubject4" %}',
+									data: {
+										'trade4': trade,       // add the country id to the POST parameters
+										'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
+									},
+									success: function (data4) {   // `data` is from `get_topics_ajax` view function
+										
+										let html_data4 = '<option value=""> sem4</option>';
+										data4.forEach(function (data4) {
+											
+											html_data4 += `<option value="${data4.id}">${data4.name}</option>`
+										});
+									
+										$(".table_show4").html(html_data4);
+										calld(trade); // replace the contents of the topic input with the data that came from the server
+									}
+								});
+							}
+							function calld(trade){
+								
+								
+								// get the selected subject ID from the HTML dropdown list 
+								$.ajax({  
+												   // initialize an AJAX request 
+									type: "GET",
+									url: '{% url "show_subject_in_addsubject5" %}',
+									data: {
+										'trade5': trade,       // add the country id to the POST parameters
+										'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
+									},
+									success: function (data4) {   // `data` is from `get_topics_ajax` view function
+										
+										let html_data4 = '<option value=""> sem4</option>';
+										data4.forEach(function (data4) {
+											
+											html_data4 += `<option value="${data4.id}">${data4.name}</option>`
+										});
+									
+										$(".table_show5").html(html_data4);
+										calle(trade); // replace the contents of the topic input with the data that came from the server
+									}
+								});
+							}
+							function calle(trade){
+								
+								
+								// get the selected subject ID from the HTML dropdown list 
+								$.ajax({  
+												   // initialize an AJAX request 
+									type: "GET",
+									url: '{% url "show_subject_in_addsubject6" %}',
+									data: {
+										'trade6': trade,       // add the country id to the POST parameters
+										'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
+									},
+									success: function (data4) {   // `data` is from `get_topics_ajax` view function
+										
+										let html_data4 = '<option value=""> sem4</option>';
+										data4.forEach(function (data4) {
+											
+											html_data4 += `<option value="${data4.id}">${data4.name}</option>`
+										});
+									
+										$(".table_show6").html(html_data4); // replace the contents of the topic input with the data that came from the server
+									}
+								});
+							}
+						});
+					});
+							</script>
+<!-- ################################################################################################################################# -->
+							<script>
+								$(document).ready(function() {
+								$(".delete_semesterchoosen").change(function() {
+									
+									const trade = $(this).val();
+									
+									// get the selected subject ID from the HTML dropdown list 
+									$.ajax({  
+													   // initialize an AJAX request 
+										type: "GET",
+										url: '{% url "show_subject_in_addsubject" %}',
+										data: {
+											'trade': trade,       // add the country id to the POST parameters
+											'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
+										},
+										success: function (data1) {   // `data` is from `get_topics_ajax` view function
+											
+											let html_data = '<option value="">sem1</option>';
+											data1.forEach(function (data1) {
+												
+												html_data += `<option value="${data1.id}">${data1.name}</option>`
+											});
+										
+											$(".table_show_delete").html(html_data);
+											calla(trade);
+											 // replace the contents of the topic input with the data that came from the server
+										}
+									});
+										
+								
+						
+								
+										function calla(trade){
+											
+										
+										
+										// get the selected subject ID from the HTML dropdown list 
+										$.ajax({  
+														   // initialize an AJAX request 
+											type: "GET",
+											url: '{% url "show_subject_in_addsubject2" %}',
+											data: {
+												'trade2': trade,       // add the country id to the POST parameters
+												'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
+											},
+											success: function (data2) {   // `data` is from `get_topics_ajax` view function
+												
+												let html_data2 = '<option value="">sem2</option>';
+												data2.forEach(function (data2) {
+													
+													html_data2 += `<option value="${data2.id}">${data2.name}</option>`
+												});
+											
+												$(".table_show2_delete").html(html_data2);
+												callb(trade); // replace the contents of the topic input with the data that came from the server
+											}
+										});
+											
+										}
+										function callb(trade){
+										
+											
+											
+											
+											// get the selected subject ID from the HTML dropdown list 
+											$.ajax({  
+															   // initialize an AJAX request 
+												type: "GET",
+												url: '{% url "show_subject_in_addsubject3" %}',
+												data: {
+													'trade3': trade,       // add the country id to the POST parameters
+													'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
+												},
+												success: function (data3) {   // `data` is from `get_topics_ajax` view function
+													
+													let html_data3 = '<option value=""> sem3</option>';
+													data3.forEach(function (data3) {
+														
+														html_data3 += `<option value="${data3.id}">${data3.name}</option>`
+													});
+												
+													$(".table_show3_delete").html(html_data3);
+													callc(trade); // replace the contents of the topic input with the data that came from the server
+												}
+											});
+												
+										}
+								
+										
+												function callc(trade){
+												
+												
+												// get the selected subject ID from the HTML dropdown list 
+												$.ajax({  
+																   // initialize an AJAX request 
+													type: "GET",
+													url: '{% url "show_subject_in_addsubject4" %}',
+													data: {
+														'trade4': trade,       // add the country id to the POST parameters
+														'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
+													},
+													success: function (data4) {   // `data` is from `get_topics_ajax` view function
+														
+														let html_data4 = '<option value=""> sem4</option>';
+														data4.forEach(function (data4) {
+															
+															html_data4 += `<option value="${data4.id}">${data4.name}</option>`
+														});
+													
+														$(".table_show4_delete").html(html_data4);
+														calld(trade); // replace the contents of the topic input with the data that came from the server
+													}
+												});
+											}
+											function calld(trade){
+												
+												
+												// get the selected subject ID from the HTML dropdown list 
+												$.ajax({  
+																   // initialize an AJAX request 
+													type: "GET",
+													url: '{% url "show_subject_in_addsubject5" %}',
+													data: {
+														'trade5': trade,       // add the country id to the POST parameters
+														'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
+													},
+													success: function (data4) {   // `data` is from `get_topics_ajax` view function
+														
+														let html_data4 = '<option value=""> sem4</option>';
+														data4.forEach(function (data4) {
+															
+															html_data4 += `<option value="${data4.id}">${data4.name}</option>`
+														});
+													
+														$(".table_show5_delete").html(html_data4);
+														calle(trade); // replace the contents of the topic input with the data that came from the server
+													}
+												});
+											}
+											function calle(trade){
+												
+												
+												// get the selected subject ID from the HTML dropdown list 
+												$.ajax({  
+																   // initialize an AJAX request 
+													type: "GET",
+													url: '{% url "show_subject_in_addsubject6" %}',
+													data: {
+														'trade6': trade,       // add the country id to the POST parameters
+														'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
+													},
+													success: function (data4) {   // `data` is from `get_topics_ajax` view function
+														
+														let html_data4 = '<option value=""> sem4</option>';
+														data4.forEach(function (data4) {
+															
+															html_data4 += `<option value="${data4.id}">${data4.name}</option>`
+														});
+													
+														$(".table_show6_delete").html(html_data4); // replace the contents of the topic input with the data that came from the server
+													}
+												});
+											}
+										});
+									});
+											</script>
+					   <!--#####################################################################################################################  -->
+					   <script>
+						$(document).ready(function() {
+						$(".update_semester_chossen").change(function() {
+							
+							const trade = $(this).val();
+							alert("hii")
+							// get the selected subject ID from the HTML dropdown list 
+							$.ajax({  
+											   // initialize an AJAX request 
+								type: "GET",
+								url: '{% url "show_subject_in_addsubject" %}',
+								data: {
+									'trade': trade,       // add the country id to the POST parameters
+									'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
+								},
+								success: function (data1) {   // `data` is from `get_topics_ajax` view function
+									
+									let html_data = '<option value="">sem1</option>';
+									data1.forEach(function (data1) {
+										
+										html_data += `<option value="${data1.id}">${data1.name}</option>`
+									});
+								
+									$(".table_show_update").html(html_data);
+									calla(trade);
+									 // replace the contents of the topic input with the data that came from the server
+								}
+							});
+								
+						
+				
+						
+								function calla(trade){
+									
+								
+								
+								// get the selected subject ID from the HTML dropdown list 
+								$.ajax({  
+												   // initialize an AJAX request 
+									type: "GET",
+									url: '{% url "show_subject_in_addsubject2" %}',
+									data: {
+										'trade2': trade,       // add the country id to the POST parameters
+										'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
+									},
+									success: function (data2) {   // `data` is from `get_topics_ajax` view function
+										
+										let html_data2 = '<option value="">sem2</option>';
+										data2.forEach(function (data2) {
+											
+											html_data2 += `<option value="${data2.id}">${data2.name}</option>`
+										});
+									
+										$(".table_show2_update").html(html_data2);
+										callb(trade); // replace the contents of the topic input with the data that came from the server
+									}
+								});
+									
+								}
+								function callb(trade){
+								
+									
+									
+									
+									// get the selected subject ID from the HTML dropdown list 
+									$.ajax({  
+													   // initialize an AJAX request 
+										type: "GET",
+										url: '{% url "show_subject_in_addsubject3" %}',
+										data: {
+											'trade3': trade,       // add the country id to the POST parameters
+											'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
+										},
+										success: function (data3) {   // `data` is from `get_topics_ajax` view function
+											
+											let html_data3 = '<option value=""> sem3</option>';
+											data3.forEach(function (data3) {
+												
+												html_data3 += `<option value="${data3.id}">${data3.name}</option>`
+											});
+										
+											$(".table_show3_update").html(html_data3);
+											callc(trade); // replace the contents of the topic input with the data that came from the server
+										}
+									});
+										
+								}
+						
+								
+										function callc(trade){
+										
+										
+										// get the selected subject ID from the HTML dropdown list 
+										$.ajax({  
+														   // initialize an AJAX request 
+											type: "GET",
+											url: '{% url "show_subject_in_addsubject4" %}',
+											data: {
+												'trade4': trade,       // add the country id to the POST parameters
+												'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
+											},
+											success: function (data4) {   // `data` is from `get_topics_ajax` view function
+												
+												let html_data4 = '<option value=""> sem4</option>';
+												data4.forEach(function (data4) {
+													
+													html_data4 += `<option value="${data4.id}">${data4.name}</option>`
+												});
+											
+												$(".table_show4_update").html(html_data4);
+												calld(trade); // replace the contents of the topic input with the data that came from the server
+											}
+										});
+									}
+									function calld(trade){
+										
+										
+										// get the selected subject ID from the HTML dropdown list 
+										$.ajax({  
+														   // initialize an AJAX request 
+											type: "GET",
+											url: '{% url "show_subject_in_addsubject5" %}',
+											data: {
+												'trade5': trade,       // add the country id to the POST parameters
+												'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
+											},
+											success: function (data4) {   // `data` is from `get_topics_ajax` view function
+												
+												let html_data4 = '<option value=""> sem4</option>';
+												data4.forEach(function (data4) {
+													
+													html_data4 += `<option value="${data4.id}">${data4.name}</option>`
+												});
+											
+												$(".table_show5_update").html(html_data4);
+												calle(trade); // replace the contents of the topic input with the data that came from the server
+											}
+										});
+									}
+									function calle(trade){
+										
+										
+										// get the selected subject ID from the HTML dropdown list 
+										$.ajax({  
+														   // initialize an AJAX request 
+											type: "GET",
+											url: '{% url "show_subject_in_addsubject6" %}',
+											data: {
+												'trade6': trade,       // add the country id to the POST parameters
+												'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
+											},
+											success: function (data4) {   // `data` is from `get_topics_ajax` view function
+												
+												let html_data4 = '<option value=""> sem4</option>';
+												data4.forEach(function (data4) {
+													
+													html_data4 += `<option value="${data4.id}">${data4.name}</option>`
+												});
+											
+												$(".table_show6_update").html(html_data4); // replace the contents of the topic input with the data that came from the server
+											}
+										});
+									}
+								});
+							});
+									</script>
+	<!-- #################id section ####################### -->
+	<script>
+		$(document).ready(function() {
+		$("#idbranch").change(function() {
+			
+			const trade_for_id = $(this).val(); 
+			// get the selected subject ID from the HTML dropdown list 
+			$.ajax({  
+								   // initialize an AJAX request
+				type: "GET",
+				url: '{% url "id_add_session_function" %}',
+				data: {
+					'trade_for_id': trade_for_id,       // add the country id to the POST parameters
+					'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
+				},
+				
+				
+		});
+		});
+	});
+		</script>
+	
+			
+			<script>
+
+				$(document).ready(function() {
+				$(".idsemester").change(function() {
+					
+					const semester = $(this).val(); 
+					 // get the selected subject ID from the HTML dropdown list 
+					$.ajax({  
+										   // initialize an AJAX request
+						type: "GET",
+						url: '{% url "id_add_after_session_function_for_semestervalue" %}',
+						data: {
+							'semester': semester,       // add the country id to the POST parameters
+							'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
+						},
+						success: function (data) {   // `data` is from `get_topics_ajax` view function
+							let html_data = '<option value="">---------</option>';
+							data.forEach(function (data) {
+								
+								html_data += `<option value="${data.id}">${data.name}</option>`
+							});
+							$(".id_choose_subject").html(html_data);
+							id_techer(semester) // replace the contents of the topic input with the data that came from the server
+						}
+					});
+					function id_techer(semester){
+							
+							 // get the selected subject ID from the HTML dropdown list 
+							$.ajax({  
+												   // initialize an AJAX request
+								type: "GET",
+								url: '{% url "id_add_after_session_function_for_namevalue" %}',
+								data: {
+									'name': semester,       // add the country id to the POST parameters
+									'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
+								},
+								success: function (data) {
+									// `data` is from `get_topics_ajax` view function
+									let html_data = '<option value="">---------</option>';
+									data.forEach(function (data) {
+										html_data += `<option value="${data.id}">${data.name}</option>`
+									});
+									$(".id_choose_name").html(html_data); // replace the contents of the topic input with the data that came from the server
+								}
+							});
+						
+					}
+					});
+					
+				});
+				
+				</script>
+
+				<script>
+					$(document).ready(function() {
+					$("#delete_id_trade").change(function() {
+						
+						const trade_for_id = $(this).val(); 
+						// get the selected subject ID from the HTML dropdown list 
+						$.ajax({  
+											   // initialize an AJAX request
+							type: "GET",
+							url: '{% url "id_add_session_function" %}',
+							data: {
+								'trade_for_id': trade_for_id,       // add the country id to the POST parameters
+								'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
+							},
+							
+							
+					});
+					});
+				});
+					</script>
+				
+						
+						<script>
+							$(document).ready(function() {
+							$("#delete_id_semester").change(function() {
+								
+								const semester = $(this).val(); 
+								
+								 // get the selected subject ID from the HTML dropdown list 
+								$.ajax({  
+													   // initialize an AJAX request
+									type: "GET",
+									url: '{% url "id_add_after_session_function_for_semestervalue" %}',
+									data: {
+										'semester': semester,       // add the country id to the POST parameters
+										'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
+									},
+									success: function (data) {   // `data` is from `get_topics_ajax` view function
+										let html_data = '<option value="">---------</option>';
+										
+										
+										data.forEach(function (data) {
+
+											value = data.name
+											
+											html_data += `<option value="${data.name}">${data.name}</option>`
+										});
+										$(".show_subject_in_delete").html(html_data);
+										
+															 // replace the contents of the topic input with the data that came from the server
+									}
+									
+								});
+								
+							});
+							});
+							</script>
+							<script>
+
+								$(document).ready(function() {
+									$("#show_subject_in_delete11").change(function() {
+										
+										const value = $(this).val(); 
+										 // get the selected subject ID from the HTML dropdown list 
+										$.ajax({  
+															   // initialize an AJAX request
+											type: "GET",
+											url: '{% url "id_delete" %}',
+											data: {
+												'semvalue_id_a': value,       // add the country id to the POST parameters
+												'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
+											},
+											success: function (data) {   // `data` is from `get_topics_ajax` view function
+												let html_data2 = '';
+												data.forEach(function (data) {
+													html_data2 += data.name
+													
+													
+						
+												});
+												$(".show_subject_in_delete_after2").html(html_data2);
+												next(value)
+												// replace the contents of the topic input with the data that came from the server
+											}
+						});
+					
+						
+							function next(value){
+							$(document).ready(function() {
+							
+									 // get the selected subject ID from the HTML dropdown list 
+									$.ajax({  
+														   // initialize an AJAX request
+										type: "GET",
+										url: '{% url "id_delete" %}',
+										data: {
+											'semvalue_id_a': value,       // add the country id to the POST parameters
+											'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
+										},
+										success: function (data) {   // `data` is from `get_topics_ajax` view function
+											let html_data2 = '';
+											data.forEach(function (data) {
+												html_data2 += data.password
+												
+												
+					
+											});
+											$(".show_subject_in_delete_after3").html(html_data2);
+											// replace the contents of the topic input with the data that came from the server
+										}
+					});
+					});
+				}
+					});
+				});
+
+					</script>
+					<script>
+						$(document).ready(function() {
+						$("#update_id_trade").change(function() {
+							
+							const trade_for_id = $(this).val(); 
+							// get the selected subject ID from the HTML dropdown list 
+							$.ajax({  
+												   // initialize an AJAX request
+								type: "GET",
+								url: '{% url "id_add_session_function" %}',
+								data: {
+									'trade_for_id': trade_for_id,       // add the country id to the POST parameters
+									'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
+								},
+								
+								
+						});
+						});
+					});
+						</script>
+					
+							
+<script>
+	$(document).ready(function() {
+	$("#update_id_semester").change(function() {
+		
+		const semester = $(this).val(); 
+		
+			// get the selected subject ID from the HTML dropdown list 
+		$.ajax({  
+								// initialize an AJAX request
+			type: "GET",
+			url: '{% url "id_add_after_session_function_for_semestervalue" %}',
+			data: {
+				'semester': semester,       // add the country id to the POST parameters
+				'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
+			},
+			success: function (data) {   // `data` is from `get_topics_ajax` view function
+				let html_data = '<option value="">---------</option>';
+				
+				
+				data.forEach(function (data) {
+
+					value = data.name
+					
+					html_data += `<option value="${data.name}">${data.name}</option>`
+				});
+				$(".show_subject_in_update").html(html_data);
+				
+										// replace the contents of the topic input with the data that came from the server
+			}
+			
+		});
+		
+	});
+	});
+	</script>
+	<script>
+
+		$(document).ready(function() {
+			$("#show_subject_in_update11").change(function() {
+				
+				const value = $(this).val(); 
+				 // get the selected subject ID from the HTML dropdown list 
+				$.ajax({  
+									   // initialize an AJAX request
+					type: "GET",
+					url: '{% url "id_update" %}',
+					data: {
+						'semvalue_id_a': value,       // add the country id to the POST parameters
+						'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
+					},
+					success: function (data) {   
+						// `data` is from `get_topics_ajax` view function
+						let html_data2 = '';
+						data.forEach(function (data) {
+							html_data2 += `<input type = "text" name="update_id_name" value="${data.name}">`					
+							
+							
+
+						});
+						$(".show_subject_in_update_after2").html(html_data2);
+						next_(value)
+						// replace the contents of the topic input with the data that came from the server
+					}
+});
+
+
+	function next_(value){
+	$(document).ready(function() {
+			
+			 // get the selected subject ID from the HTML dropdown list 
+			$.ajax({  
+								   // initialize an AJAX request
+				type: "GET",
+				url: '{% url "id_update" %}',
+				data: {
+					'semvalue_id_a': value,       // add the country id to the POST parameters
+					'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
+				},
+				success: function (data) {   // `data` is from `get_topics_ajax` view function
+					let html_data3 = '';
+					data.forEach(function (data) {
+						html_data3 += `<input type = "text" name="update_id_password" value="${data.password}">`	
+				
+						
+
+					});
+					$(".show_subject_in_update_after3").html(html_data3);
+					// replace the contents of the topic input with the data that came from the server
+				}
+});
+});
+}
+});
+});
+
+</script>
+<script>
+	
+		$(document).ready(function() {
+		$("#trade_choose_selecttrade").change(function() {
+			
+			const trade_choose_selecttrade = $(this).val(); 
+			// get the selected subject ID from the HTML dropdown list 
+			$.ajax({  
+								   // initialize an AJAX request
+				type: "GET",
+				url: '{% url "shownotes_to_admin" %}',
+				data: {
+					'trade_choose_selecttrade': trade_choose_selecttrade,       // add the country id to the POST parameters
+					'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
+				},
+				
+				
+		});
+		});
+	});
+		
+	
+</script>
+<script>
+	$(document).ready(function() {
+		$("#semster_choose_selectsem").change(function() {	
+		
+		const semster_choose_selectsem = $(this).val();
+		// get the selected subject ID from the HTML dropdown list 
+	   $.ajax({  
+							  // initialize an AJAX request
+		   type: "GET",
+		   url: '{% url "shownotes_to_admin_after_session" %}',
+		   data: {
+			   'semster_choose_selectsem': semster_choose_selectsem,       // add the country id to the POST parameters
+			   'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
+		   },
+		   success: function (data) {   // `data` is from `get_topics_ajax` view function
+			   let html_data3 = '';
+			   data.forEach(function (data) {
+				   html_data3 += `${data.name} ${data.subject} ${data.code}<br>`	
+				   
+				   
+
+			   });
+			   $(".showurl").html(html_data3);
+			  call11(data);
+			   // replace the contents of the topic input with the data that came from the server
+		   }
+});
+function call11(data){
+$(document).ready(function(data) {
+	
+	
+	
+	// get the selected subject ID from the HTML dropdown list 
+   $.ajax({  
+						  // initialize an AJAX request
+	   type: "GET",
+	   url: '{% url "shownotes_to_admin_after_session" %}',
+	   data: {
+		   'semster_choose_selectsem': semster_choose_selectsem,       // add the country id to the POST parameters
+		   'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
+	   },
+	   success: function (data) {   // `data` is from `get_topics_ajax` view function
+		   let html_data445 = '';
+		   data.forEach(function (data) {
+
+			html_data445 += `<button class="GFG" 
+			onclick="window.location.href = '${data.image_url}';">
+			  View
+			</button><br>`	
+	
+			   
+
+		   });
+		   $(".showur-l").html(html_data445);
+		  call44(data)
+		   // replace the contents of the topic input with the data that came from the server
+	   }
+	   
+});
+function call44(data){
+	$(document).ready(function(data) {
+		
+		
+		
+		// get the selected subject ID from the HTML dropdown list 
+	   $.ajax({  
+							  // initialize an AJAX request
+		   type: "GET",
+		   url: '{% url "shownotes_to_admin_after_session" %}',
+		   data: {
+			   'semster_choose_selectsem': semster_choose_selectsem,       // add the country id to the POST parameters
+			   'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
+		   },
+		   success: function (data) {   // `data` is from `get_topics_ajax` view function
+			   let html_data44 = '';
+			   data.forEach(function (data) {
+	
+				   html_data44 += ` <button type="submit" value={${data.code} onclick="location.href='{% url 'delet_notesinadmin' %}?data=${data.code}'" name= '${data.code}'> ${data.code}Delet</button><br>`	
+		
+				   
+	
+			   });
+			   $(".showurl44").html(html_data44);
+			  
+			   // replace the contents of the topic input with the data that came from the server
+		   }
+	});
+	});
+	}
+});
+}
+});
+});
+
+</script>
+
+<script>
+function openNav() {
+  document.getElementById("mySidenav").style.width = "250px";
+}
+
+/* Set the width of the side navigation to 0 */
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+} 
+</script>
+</head>
+<style>
+body{
+	background: gray;
+}
+	@media screen and (max-width: 600px) {
+		  .center {
+			 
+			font-size: 10vw;
+			margin-top: 195px;
+			line-height: 45px !important; 
+			
+		  }
+		}
+	  @media only screen 
+  and (min-device-width: 768px) 
+  and (max-device-width: 1024px)  {
+		.center {
+		  font-size: 5vw;
+		  margin-top: 320px;
+		}
+	  }
+
+
+	  <!--  -->
+	  @media screen and (max-width: 600px) {
+		.center h2{
+			font-size: 5vw;
+			line-height: 40px;
+			font-weight: bold;
+		}
+	  }
+	  @media screen 
+	  and (device-width: 360px) 
+	  and (device-height: 640px)  {
+		.navbar-collapse{
+            font-size: 4.5vw !important;
+	  }
+	}
+
+	@media only screen 
+	and (min-device-width: 768px) 
+	and (max-device-width: 1024px)  {
+		  .kp{
+			margin-top: 240px;
+		  }
+		}
+
+
+   .v1 img{
+	height: 75vh;
+	border: 3px solid #d2cfcf;
+	position: sticky;
+	border-radius: 2% 6% 5% 4% / 1% 1% 2% 4%;
+	width: 100%;
+   }
+   .sidenav {
+	height: 100%; /* 100% Full-height */
+	width: 0; /* 0 width - change this with JavaScript */
+	position: fixed; /* Stay in place */
+	z-index: 1; /* Stay on top */
+	top: 0; /* Stay at the top */
+	left: 0;
+	background-color: #111; /* Black*/
+	overflow-x: hidden; /* Disable horizontal scroll */
+	padding-top: 60px; /* Place content 60px from the top */
+	transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+  }
+  
+  /* The navigation menu links */
+  .sidenav a {
+	padding: 8px 8px 8px 32px;
+	text-decoration: none;
+	font-size: 25px;
+	color: #818181;
+	display: block;
+	transition: 0.3s;
+  }
+  
+  /* When you mouse over the navigation links, change their color */
+  .sidenav a:hover {
+	color: #f1f1f1;
+  }
+  
+  /* Position and style the close button (top right corner) */
+  .sidenav .closebtn {
+	position: absolute;
+	top: 0;
+	right: 25px;
+	font-size: 20px;
+	margin-left: 50px;
+  }
+  
+  /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+  #main {
+	transition: margin-left .5s;
+	padding: 20px;
+  }
+  
+  /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+  @media screen and (max-height: 450px) {
+	.sidenav {padding-top: 15px;}
+	.sidenav a {font-size: 18px;}
+  }
+  span{
+	background: black;
+	height: 100vh;
+	position: absolute;
+	width: 35px;
+	border-radius: 0px 30px 30px 0px;
+  }
+  ul {
+	list-style-type: none;
+	overflow: hidden;
+	background-color: #333;
+	border-radius: 0px 0px 30px 30px;
+
+  }
+  
+  li {
+	float: left;
+  }
+  
+  li a {
+	display: block;
+	color: white;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+  }
+  
+  li a:hover:not(.active) {
+	background-color: #111;
+  }
+  
+  .active {
+	background-color: #4c5c4c;
+  }
+  .container {
+    display: none;
+}
+.contact-form{
+	margin-top: 8%;
+	margin-bottom: 5%;
+	width: 100%;
+}
+.contact-form .form-control{
+	height: 30px;
+}
+.contact-image{
+	text-align: center;
+}
+
+.contact-form form{
+	padding: 10%;
+	border: 2px solid aliceblue;
+	border-radius: 102px;
+}
+.contact-form form .row{
+	margin-bottom: -7%;
+}
+.contact-form h3{
+	margin-bottom: 8%;
+	margin-top: -10%;
+	text-align: center;
+	color: white;
+	font-weight: bold;
+}
+.contact-form .btnContact {
+	width: 217px;
+	border: none;
+	border-radius: 1rem;
+	padding: 5.5%;
+	background: black;
+	font-weight: 600;
+	color: #fff;
+	cursor: pointer;
+}
+.contact-form .btnContact:hover {
+	background: #794b4e;
+}
+.btnContactSubmit
+{
+	width: 50%;
+	border-radius: 1rem;
+	padding: 1.5%;
+	color: #fff;
+	background-color: #0062cc;
+	border: none;
+	cursor: pointer;
+}
+
+@media screen and (max-width: 600px) {
+	.contact-form{
+		width: 90%;
+		height: auto;
+		border-radius: 40px;
+		margin-top: 50px;
+}
+}
+
+
+@media only screen 
+and (min-device-width: 768px) 
+and (max-device-width: 1024px)  {
+.contact-form{
+	margin-top: 140px;
+	height: 50vh;
+	width: 85%;
+  }
+}
+@media only screen 
+and (min-device-width: 768px) 
+and (max-device-width: 1024px)  {
+	.contact-image img{
+		width: 90px;
+	}
+  }
+  @media only screen 
+  and (min-device-width: 768px) 
+  and (max-device-width: 1024px)  {
+	.contact-form form{
+		padding: 5%;
+		margin-top: 80px;
+	  }
+	}
+	@media screen and (max-width: 600px) {
+	  .contact-form form{
+		padding: 5%;
+		margin-top: 15px;
+		}
+	  }
+
+@media screen 
+and (device-width: 360px) 
+and (device-height: 640px)  {
+.contact-form .form-control{
+	height: 55px;
+}
+}
+@media screen 
+and (device-width: 360px) 
+and (device-height: 640px)  {
+.contact-form{
+	margin-top: 140px;
+	height: 50vh;
+
+  }
+}
+select{
+	width: 100%;
+}
+#g{
+	border: 2px solid white;
+	position: relative;
+	height: 150px;
+	width: 315px;
+	border-radius: 10px;
+	margin-left: 49px;
+	margin-bottom: 25px;
+	overflow-y: scroll;
+}
+</style>
+
+
+<body>
+
+	
+
+	
+		<!--  -->
+ 
+		<div id="mySidenav" class="sidenav">
+			<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+			<a class="button active" data-rel="#content-a" href="#">Subject Edit</a>
+			<a  class="button" data-rel="#content-b" href="#">ID Edit</a>
+		  </div>
+		  
+		  <!-- Use any element to open the sidenav -->
+		  <span onclick="openNav()"><i class="fa fa-arrow-right fa-2x" style="color: white;margin-top: 305px;"></i></span>
+		  
+		  <!-- Add all page content inside this div if you want the side nav to push page content to the right (not used if you only want the sidenav to sit on top of the page -->
+<div class="container" id="content-a" >
+<table>
+	<ul>
+		<li><a class="bbutton aactive" id="button1" data-rel="#ccontent-a"  href="#">Add Subject</a></li>
+		<li><a  class="bbutton" data-rel="#ccontent-b" href="#">Delete Subject</a></li>
+		<li><a  class="bbutton" data-rel="#ccontent-c" href="#">Update Subject</a></li>
+		<li><a  class="bbutton" data-rel="#ccontent-d" href="#">Notes Show and delete</a></li>
+	  </ul> 
+</table>
+<!--a  --> <li class="nav-item h5">
+				<a class="nav-link text-white" href="{% url 'logout_request_admin' %}">logout</a>
+			</li>
+<div class="ccontainer" id="ccontent-a"> 
+	<div class="contact-form">
+		<form class="fm" action = "admin_add_subject" method = "POST" enctype="multipart/form-data">
+				{% csrf_token %}
+				
+			<h3>Ａｄｄ Ｓｕｂｊｅｃｔ</h3>
+		   <div class="row">
+				<div class="col-md-4"  style="border-right: 2px solid white;">
+					<div class="form-group">
+						<select class="semster_choose" name="trade" aria-label="Default select example">
+							<option selected>Select Branch</option>
+							<option value="cse">CSE</option>
+							<option value="electrical">EE</option>
+							<option value="ece">ECE</option>
+							<option value="mechanical">ME</option>
+							<option value="civil">CE</option>
+							<option value="auto">Auto</option>
+						  </select>
+					</div>
+					<div class="form-group">
+						<select class="form-select" name="sem" aria-label="Default select example">
+							<option selected>Select Semester</option>
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">6</option>
+						  </select>
+					</div>
+					<div class="form-group">
+						<input type="text" name="sub" class="form-control" placeholder="NEW subject Name *" value="" />
+					</div>
+					
+					<div class="form-group">
+						<input type="submit" name="submit" class="btnContact" value="ADD" />
+						
+					</div>
+					
+					{{error}}
+				</div>
+
+				<!--  -->
+				<div class="col-md-8">
+					<div class="d-flex justify-content-center">
+
+						<div class="table_show" id="g" style="margin-left: 0px;" >
+							<table class="table table-dark">
+							   <thead>
+								 <tr>
+								   <th scope="col">#</th>
+								   <th scope="col">Subjects in semester 1</th>
+								 </tr>
+							   </thead>
+							   <tbody>
+								 <tr>
+								   <th scope="row"></th>
+					
+								 </tr>
+								 <tr>
+							   </tbody>
+							 </table>
+						</div>
+						<div class="table_show2" id="g">
+							<table class="table table-dark">
+								<thead>
+								  <tr>
+									<th scope="col">#</th>
+									<th scope="col">Subjects in semester 2</th>
+								  </tr>
+								</thead>
+								<tbody>
+								  <tr>
+									<th scope="row"></th>
+					 
+								  </tr>
+								  <tr>
+								</tbody>
+							  </table>
+				   
+					   </div>
+					   <div class="table_show3" id="g">
+						<table class="table table-dark">
+							<thead>
+							  <tr>
+								<th scope="col">#</th>
+								<th scope="col">Subjects in semester 3</th>
+							  </tr>
+							</thead>
+							<tbody>
+							  <tr>
+								<th scope="row"></th>
+				 
+							  </tr>
+							  <tr>
+							</tbody>
+						  </table>
+				   
+					   </div>
+				   
+					   </div>
+					   <div class="d-flex justify-content-center">
+						   <div class="table_show4" style="margin-left: 0px;" id="g">
+							<table class="table table-dark">
+								<thead>
+								  <tr>
+									<th scope="col">#</th>
+									<th scope="col">Subjects in semester 4</th>
+								  </tr>
+								</thead>
+								<tbody>
+								  <tr>
+									<th scope="row"></th>
+					 
+								  </tr>
+								  <tr>
+								</tbody>
+							  </table>
+					  
+						   </div>
+						   <div class="table_show5" id="g">
+							<table class="table table-dark">
+								<thead>
+								  <tr>
+									<th scope="col">#</th>
+									<th scope="col">Subjects in semester 5</th>
+								  </tr>
+								</thead>
+								<tbody>
+								  <tr>
+									<th scope="row"></th>
+					 
+								  </tr>
+								  <tr>
+								</tbody>
+							  </table>
+					  
+						  </div>
+						  <div class="table_show6" id="g">
+							<table class="table table-dark">
+								<thead>
+								  <tr>
+									<th scope="col">#</th>
+									<th scope="col">Subjects in semester 6</th>
+								  </tr>
+								</thead>
+								<tbody>
+								  <tr>
+									<th scope="row"></th>
+					 
+								  </tr>
+								  <tr>
+								</tbody>
+							  </table>
+					  
+						  </div>
+				   
+						  </div>
+				</div>
+			</div>
+		</form>
+		
+
+	</div>
+	<!--  -->
+	
+<!--  -->
+</div>
+<!-- b -->
+<div class="ccontainer" id="ccontent-b"> 
+	<div class="contact-form">
+		<form class="fm" action = "delete_subject_query" method = "POST" enctype="multipart/form-data">
+				{% csrf_token %}
+				
+			<h3>Ｄｅｌｅｔｅ Ｓｕｂｊｅｃｔ</h3>
+		   <div class="row">
+				<div class="col-md-4" style="border-right: 2px solid white;">
+					<div class="form-group">
+						<select class="delete_semesterchoosen" id="field" name="trade" aria-label="Default select example">
+							
+							<option selected>Select Branch</option>
+							<option value="cse">CSE</option>
+							<option value="electrical">EE</option>
+							<option value="ece">ECE</option>
+							<option value="mechanical">ME</option>
+							<option value="civil">CE</option>
+							<option value="auto">Auto</option>
+						  </select>
+					</div>
+					<div class="form-group">
+						<select class="field2" name="sem" aria-label="Default select example">
+							<option selected>Select Semester</option>
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">6</option>
+						  </select>
+					</div>
+					<div class="form-group">
+						<select class="field3" name="sub" aria-label="Default select example">
+
+							<option selected>Select subject</option>
+							
+						  </select>
+					</div>
+					
+					<div class="form-group">
+						<input type="submit" name="delete" class="btnContact" value="Show" />
+					</div>
+
+				</div>
+				
+			
+				<div class="d-flex justify-content-center">
+
+					<div class="table_show_delete" id="g" style="margin-left: 0px;" >
+						<table class="table table-dark">
+						   <thead>
+							 <tr>
+							   <th scope="col">#</th>
+							   <th scope="col">Subjects in semester 1</th>
+							 </tr>
+						   </thead>
+						   <tbody>
+							 <tr>
+							   <th scope="row"></th>
+				
+							 </tr>
+							 <tr>
+						   </tbody>
+						 </table>
+					</div>
+					<div class="table_show2_delete" id="g">
+						<table class="table table-dark">
+							<thead>
+							  <tr>
+								<th scope="col">#</th>
+								<th scope="col">Subjects in semester 2</th>
+							  </tr>
+							</thead>
+							<tbody>
+							  <tr>
+								<th scope="row"></th>
+				 
+							  </tr>
+							  <tr>
+							</tbody>
+						  </table>
+			   
+				   </div>
+				   <div class="table_show3_delete" id="g">
+					<table class="table table-dark">
+						<thead>
+						  <tr>
+							<th scope="col">#</th>
+							<th scope="col">Subjects in semester 3</th>
+						  </tr>
+						</thead>
+						<tbody>
+						  <tr>
+							<th scope="row"></th>
+			 
+						  </tr>
+						  <tr>
+						</tbody>
+					  </table>
+			   
+				   </div>
+			   
+				   </div>
+				   <div class="d-flex justify-content-center">
+					   <div class="table_show4_delete" style="margin-left: 0px;" id="g">
+						<table class="table table-dark">
+							<thead>
+							  <tr>
+								<th scope="col">#</th>
+								<th scope="col">Subjects in semester 4</th>
+							  </tr>
+							</thead>
+							<tbody>
+							  <tr>
+								<th scope="row"></th>
+				 
+							  </tr>
+							  <tr>
+							</tbody>
+						  </table>
+				  
+					   </div>
+					   <div class="table_show5_delete" id="g">
+						<table class="table table-dark">
+							<thead>
+							  <tr>
+								<th scope="col">#</th>
+								<th scope="col">Subjects in semester 5</th>
+							  </tr>
+							</thead>
+							<tbody>
+							  <tr>
+								<th scope="row"></th>
+				 
+							  </tr>
+							  <tr>
+							</tbody>
+						  </table>
+				  
+					  </div>
+					  <div class="table_show6_delete" id="g">
+						<table class="table table-dark">
+							<thead>
+							  <tr>
+								<th scope="col">#</th>
+								<th scope="col">Subjects in semester 6</th>
+							  </tr>
+							</thead>
+							<tbody>
+							  <tr>
+								<th scope="row"></th>
+				 
+							  </tr>
+							  <tr>
+							</tbody>
+						  </table>
+				  
+					  </div>
+			   
+					  </div>
+		</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+
+<div class="ccontainer" id="ccontent-c"> 
+	<div class="contact-form">
+		<form class="fm" action = "update_subject_query" method = "POST" enctype="multipart/form-data">
+				{% csrf_token %}
+				
+			<h3>Ｕｐｄａｔｅ Ｓｕｂｊｅｃｔ</h3>
+		   <div class="row">
+			<div class="col-md-4"  style="border-right: 2px solid white;">
+					<div class="form-group">
+						<select class="update_semester_chossen" id="field_" name="trade" aria-label="Default select example">
+							<option selected>Select Branch</option>
+							<option value="cse">CSE</option>
+							<option value="electrical">EE</option>
+							<option value="ece">ECE</option>
+							<option value="mechanical">ME</option>
+							<option value="civil">CE</option>
+							<option value="auto">Auto</option>
+						  </select>
+					</div>
+					<div class="form-group">
+						<select class="field2_" name="sem" aria-label="Default select example">
+							<option selected>Select Semester</option>
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">6</option>
+						  </select>
+					</div>
+					<div class="form-group">
+						<select class="field3" name="sub" aria-label="Default select example">
+
+							<option selected>Select subject</option>
+							
+						  </select>
+					</div>
+					<div class="form-group">
+						<input type="text" name="new_sub" class="form-control" placeholder="NEW subject Name *" value="" />
+					</div>
+					
+					<div class="form-group">
+						<input type="submit" name="up" class="btnContact" value="UPDATE" />
+					</div>
+				</div>
+				<div class="d-flex justify-content-center">
+
+					<div class="table_show_update" id="g" style="margin-left: 0px;" >
+						<table class="table table-dark">
+						   <thead>
+							 <tr>
+							   <th scope="col">#</th>
+							   <th scope="col">Subjects in semester 1</th>
+							 </tr>
+						   </thead>
+						   <tbody>
+							 <tr>
+							   <th scope="row"></th>
+				
+							 </tr>
+							 <tr>
+						   </tbody>
+						 </table>
+					</div>
+					<div class="table_show2_update" id="g">
+						<table class="table table-dark">
+							<thead>
+							  <tr>
+								<th scope="col">#</th>
+								<th scope="col">Subjects in semester 2</th>
+							  </tr>
+							</thead>
+							<tbody>
+							  <tr>
+								<th scope="row"></th>
+				 
+							  </tr>
+							  <tr>
+							</tbody>
+						  </table>
+			   
+				   </div>
+				   <div class="table_show3_update" id="g">
+					<table class="table table-dark">
+						<thead>
+						  <tr>
+							<th scope="col">#</th>
+							<th scope="col">Subjects in semester 3</th>
+						  </tr>
+						</thead>
+						<tbody>
+						  <tr>
+							<th scope="row"></th>
+			 
+						  </tr>
+						  <tr>
+						</tbody>
+					  </table>
+			   
+				   </div>
+			   
+				   </div>
+				   <div class="d-flex justify-content-center">
+					   <div class="table_show4_update" style="margin-left: 0px;" id="g">
+						<table class="table table-dark">
+							<thead>
+							  <tr>
+								<th scope="col">#</th>
+								<th scope="col">Subjects in semester 4</th>
+							  </tr>
+							</thead>
+							<tbody>
+							  <tr>
+								<th scope="row"></th>
+				 
+							  </tr>
+							  <tr>
+							</tbody>
+						  </table>
+				  
+					   </div>
+					   <div class="table_show5_update" id="g">
+						<table class="table table-dark">
+							<thead>
+							  <tr>
+								<th scope="col">#</th>
+								<th scope="col">Subjects in semester 5</th>
+						  </tr>
+							</thead>
+							<tbody>
+							  <tr>
+								<th scope="row"></th>
+				 
+							  </tr>
+							  <tr>
+							</tbody>
+						  </table>
+				  
+					  </div>
+					  <div class="table_show6_update" id="g">
+						<table class="table table-dark">
+							<thead>
+							  <tr>
+								<th scope="col">#</th>
+								<th scope="col">Subjects in semester 6</th>
+							  </tr>
+							</thead>
+							<tbody>
+							  <tr>
+								<th scope="row"></th>
+				 
+							  </tr>
+							  <tr>
+							</tbody>
+						  </table>
+				  
+					  </div>
+			   
+					  </div> 
+						
+				</div>
+			</div>
+		</form>
+	</div>
+
+
+
+	<!-- c -->
+	<div class="ccontainer" id="ccontent-d"> 
+		<div class="contact-form">
+			
+					
+				<h3>SHOW NOTES</h3>
+			   <div class="row">
+					<div class="col-md-4"  style="border-right: 2px solid white;">
+						<div class="form-group">
+							<select class="" id="trade_choose_selecttrade" name="trade" aria-label="Default select example">
+								<option selected>Select Branch</option>
+								<option value="notesaddcse">CSE</option>
+								<option value="notesaddelectrical">EE</option>
+								<option value="notesaddece">ECE</option>
+								<option value="notesaddmechanical">ME</option>
+								<option value="notesaddcivil">CE</option>
+								<option value="notesaddauto">Auto</option>
+							  </select>
+						</div>
+						<div class="form-group">
+							<select id="semster_choose_selectsem" name="sem" aria-label="Default select example">
+								<option selected>Select Semester</option>
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+								<option value="5">5</option>
+								<option value="6">6</option>
+							  </select>
+						</div>
+						<div class="form-group">
+							<select class="semster_choose_selectsubject" name="sub" aria-label="Default select example">
+	
+								<option selected>Select subject</option>
+								
+							  </select>
+						</div>				
+					</div>
+
+					<div class="showurl" id="demo" style="overflow-y: scroll;">
+					
+		
+							
+				</div>
+				<div class="showur-l" id="demo" style="overflow-y: scroll;">
+					
+		
+							
+				</div>
+				<div class="showurl44" id="demo" style="overflow-y: scroll;">
+					
+		
+							
+				</div>
+			
+			
+	
+		</div>
+</div>
+<!-- e -->
+
+<!-- / -->
+</div>
+
+<div  class="container" id="content-b">
+	<table>
+		<ul>
+			<li><a class="bbbutton aaactive" data-rel="#cccontent-a"  href="#">Add Id</a></li>
+			<li><a class="bbbutton" data-rel="#cccontent-b" href="#">Delete Id</a></li>
+			<li><a class="bbbutton" data-rel="#cccontent-c" href="#">Update Id</a></li>
+		  </ul> 
+	</table>
+	<div class="cccontainer" id="cccontent-a">
+		<div class="contact-form">
+			<form class="fm" action = "id_add" method = "POST" enctype="multipart/form-data">
+					{% csrf_token %}
+					
+				<h3>ＡＤＤ ＩＤ</h3>
+			   <div class="row">
+				<div class="col-md-4"  style="border-right: 2px solid white;">
+						<div class="form-group">
+							<select class="" id="idbranch" name="trade_for_id" aria-label="Default select example">
+								<option selected>Select Branch</option>
+								<option value="cse">CSE</option>
+								<option value="elec">EE</option>
+								<option value="ece">ECE</option>
+								<option value="mech">ME</option>
+								<option value="civil">CE</option>
+								<option value="auto">Auto</option>
+							  </select>
+						</div>
+						<div class="form-group">
+							<select class="idsemester" name="semester_for_id" aria-label="Default select example">
+								<option selected>Select Semester</option>
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+								<option value="5">5</option>
+								<option value="6">6</option>
+							  </select>
+						</div>
+						<div class="form-group">
+							<select class="id_choose_subject" name="id_choose_subject" subject aria-label="Default select example">
+								<option selected>Select Subject</option>
+								
+							  </select>
+						</div>
+						<div class="form-group">
+							<select class="id_choose_name" name="id_choose_name" name="name" subject aria-label="Default select example">
+								<option selected>Select techer name</option>
+								
+							  </select>
+						</div>
+						<div class="form-group">
+							<input type="text" name="password" class="form-control" placeholder="Enter Password *" value="" />
+						</div>
+						
+                        <div class="form-group">
+							<input type="submit" name="submit" class="btnContact" value="ADD" />
+							{{error}}
+						</div>
+						
+						
+					</div>
+					<div class="col-md-8" style="overflow-y: scroll;">
+						
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+<div class="cccontainer" id="cccontent-b"> 
+	<div class="contact-form">
+		<form class="fm" action = "delete_id_aftereveyrhting" method = "POST" enctype="multipart/form-data">
+				{% csrf_token %}
+				
+			<h3>Ｄｅｌｅｔｅ ＩＤ</h3>
+		   <div class="row">
+			<div class="col-md-4"  style="border-right: 2px solid white;">
+					<div class="form-group">
+						<select class="form-select" id="delete_id_trade" name="" aria-label="Default select example">
+							<option selected>Select Branch</option>
+								<option value="cse">CSE</option>
+								<option value="elec">EE</option>
+								<option value="ece">ECE</option>
+								<option value="mech">ME</option>
+								<option value="civil">CE</option>
+								<option value="auto">Auto</option>
+						  </select>
+					</div>
+					<div class="form-group">
+						<select class="form-select" name="semester_delete_id" id="delete_id_semester" aria-label="Default select example">
+							<option selected>Select Semester</option>
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+								<option value="5">5</option>
+								<option value="6">6</option>
+						  </select>
+					</div>
+					<div class="form-group">
+						<select class="show_subject_in_delete" id="show_subject_in_delete11" name="id_choose_subject" subject aria-label="Default select example">
+							<option selected>Select Subject</option>
+							
+						  </select>
+					</div>
+				
+				
+				
+					<div class="form-group">
+						<input type="submit" name="delete_id_button" class="btnContact" value="delete" />
+					</div>
+
+				</div>
+				<div class="show_subject_in_delete_after2" id="g">
+					
+					<table class="table table-dark">
+						<thead>
+						  <tr>
+							<th scope="col">#</th>
+							<th scope="col">Subjects in semester 6</th>
+						  </tr>
+						</thead>
+						<tbody>
+						  <tr>
+							<th scope="row"></th>
+			 
+						  </tr>
+						  <tr>
+						</tbody>
+					  </table>
+			  
+				  </div>
+				  <div class="show_subject_in_delete_after3" id="g">
+					
+					<table class="table table-dark">
+						<thead>
+						  <tr>
+							<th scope="col">#</th>
+							<th scope="col">Subjects in semester 6</th>
+						  </tr>
+						</thead>
+						<tbody>
+						  <tr>
+							<th scope="row"></th>
+			 
+						  </tr>
+						  <tr>
+						</tbody>
+					  </table>
+			  
+				  </div>
+			</div>
+			
+				
+		</div>
+		</form>
+	</div>
+</div>
+<div class="cccontainer" id="cccontent-c"> 
+	<div class="contact-form">
+		<form class="fm" action = "update_id" method = "POST" enctype="multipart/form-data">
+				{% csrf_token %}
+				
+			<h3>Ｕｐｄａｔｅ ＩＤ</h3>
+		   <div class="row">
+			<div class="col-md-4"  style="border-right: 2px solid white;">
+					<div class="form-group">
+						<select class="form-select" id="delete_id_trade" name="update_trade_id" aria-label="Default select example">
+							<option value="cse">CSE</option>
+								<option value="elec">EE</option>
+								<option value="ece">ECE</option>
+								<option value="mech">ME</option>
+								<option value="civil">CE</option>
+								<option value="auto">Auto</option>
+						  </select>
+					</div>
+					<div class="form-group">
+						<select class="form-select" id="update_id_semester" name="update_semester_id" aria-label="Default select example">
+							<option selected>Select Semester</option>
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">6</option>
+						  </select>
+					</div>
+					<div class="form-group">
+						<select class="show_subject_in_update" name="update_subject_id" id="show_subject_in_update11" aria-label="Default select example">
+							<option selected>Select Subject</option>
+							
+						  </select>
+					</div>
+					<div class="form-group">
+						<div class="show_subject_in_update_after2">
+						
+						</div>	
+						</div>
+					<div class="form-group">
+					<div class="show_subject_in_update_after3">
+						
+					</div>	
+					</div>
+					
+					
+						
+					</div>
+					
+					<div class="form-group">
+						<input type="submit" name="up" class="btnContact" value="UPDATE" />
+					</div>
+				</div>
+				<div class="" style="overflow-y: scroll;">
+						
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+	</div>
+	<script>
+		
+		$('.button').click(function(e) {
+			e.preventDefault();
+			setContent($(this));
+		});
+		
+		// set content on load
+		$('.button.active').length && setContent($('.button.active'));
+		
+		function setContent($el) {
+			$('.button').removeClass('active');
+			$('.container').hide();
+			
+			$el.addClass('active');
+			$($el.data('rel')).show();
+		}
+	
+</script>
+
+<!-- a -->
+<script>
+		
+	$('.bbutton').click(function(e) {
+		e.preventDefault();
+		setContentt($(this));
+	});
+	
+	// set content on load
+	$('.bbutton.aactive').length && setContentt($('.bbutton.aactive'));
+	
+	function setContentt($el) {
+		$('.bbutton').removeClass('aactive');
+		$('.ccontainer').hide();
+		
+		$el.addClass('aactive');
+		$($el.data('rel')).show();
+	}
+
+</script>
+<!-- b -->
+<script>
+		
+	$('.bbbutton').click(function(e) {
+		e.preventDefault();
+		setContenttt($(this));
+	});
+	
+	// set content on load
+	$('.bbbutton.aaactive').length && setContenttt($('.bbbutton.aaactive'));
+	
+	function setContenttt($el) {
+		$('.bbbutton').removeClass('aaactive');
+		$('.cccontainer').hide();
+		
+		$el.addClass('aaactive');
+		$($el.data('rel')).show();
+	}
+
+</script>
+</body>
+
+</html>
